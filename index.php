@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Enum\TaskStatus;
 use App\Task;
+use App\TaskFilter;
 use App\TaskManager;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -25,6 +26,14 @@ $newTasks = $manager->getTasksByStatus(TaskStatus::NEW);
 echo "Задачи NEW:\n";
 
 foreach ($newTasks as $task) {
+    echo $task . "\n";
+}
+
+echo "\nОтсортированные задачи:\n";
+
+$sorted = TaskFilter::sortByDate($manager->getTasks(), 'desc');
+
+foreach ($sorted as $task) {
     echo $task . "\n";
 }
 

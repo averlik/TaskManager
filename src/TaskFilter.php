@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Enum\TaskStatus;
+use InvalidArgumentException;
 
 class TaskFilter
 {
@@ -28,6 +29,10 @@ class TaskFilter
      */
     public static function sortByDate(array $tasks, string $direction = 'asc'): array
     {
+        if (!in_array($direction, ['asc', 'desc'], true)) {
+            throw new InvalidArgumentException('Invalid sort direction');
+        }
+
         usort(
             $tasks,
             function (Task $a, Task $b) use ($direction): int {
