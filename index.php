@@ -19,20 +19,21 @@ $manager->addTask($task1);
 $manager->addTask($task2);
 $manager->addTask($task3);
 
+// Изменяем статус первой задачи
 $task1->changeStatus(TaskStatus::IN_PROGRESS);
 
-$newTasks = $manager->getTasksByStatus(TaskStatus::NEW);
+// Фильтруем задачи по статусу NEW через TaskFilter
+$newTasks = TaskFilter::filterByStatus($manager->getTasks(), TaskStatus::NEW);
 
 echo "Задачи NEW:\n";
-
 foreach ($newTasks as $task) {
     echo $task . "\n";
 }
 
-echo "\nОтсортированные задачи:\n";
-
+// Сортировка всех задач по дате
 $sorted = TaskFilter::sortByDate($manager->getTasks(), 'desc');
 
+echo "\nОтсортированные задачи:\n";
 foreach ($sorted as $task) {
     echo $task . "\n";
 }

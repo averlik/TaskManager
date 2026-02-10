@@ -79,7 +79,8 @@ class Task
     public function __toString(): string
     {
         return sprintf(
-            "%s | %s | %s | %s",
+            "%s | %s | %s | %s | %s",
+            $this->id,
             $this->title,
             $this->description,
             $this->status->label(),
